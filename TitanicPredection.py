@@ -30,6 +30,10 @@ RF_model = RandomForestClassifier(**parameters)
 
 RF_model.fit(train_X, train_y)
 
+feat_imps=pd.DataFrame(list(zip(train_X.columns,RF_model.feature_importances_)),columns=["feature","Importance"])
+feat_imps.sort_values(by="Importance",ascending=False,inplace=True)
+print(feat_imps)
+#print(RF_model.feature_importances_)
 RF_predictions = RF_model.predict(test_X)
 
 score = accuracy_score(test_y ,RF_predictions)
